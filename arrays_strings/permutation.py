@@ -1,8 +1,10 @@
+import unittest2
+
 """
 Given two strings, write a method to decide if one is a permutation of the
 other.
 """
-from collections import defaultdict
+from collections import Counter
 
 
 def permutation1(str1, str2):
@@ -27,15 +29,34 @@ def permutation2(str1, str2):
     """
     if len(str1) != len(str2):
         return False
-    chars_map = defaultdict(int)
-    for char in str1:
-        chars_map[char] += 1
+    chars_map = Counter(str1)  # dict holding count of characters in str1
     for char in str2:
-        chars_map[char] += 1
-    return set(chars_map.values()) == {2}
+        if chars_map[char] == 0:  # Character not found in str1
+            return False
+        chars_map[char] -= 1  # Decrement count to account for duplicate characters in the strings
+    return True
+
+
+class Test(unittest2.TestCase):
+    dataT = (
+        ('abcd', 'bacd'),
+        ('3563476', '7334566'),
+        ('wef34f', 'wffe34'),
+    )
+    dataF = (
+        ('abcd', 'd2cba'),
+        ('2354', '1234'),
+        ('dcw4f', 'dcw5f'),
+    )
+
+    def test_permutation(self):
+        # True check
+        for test_string1, test_string2 in self.dataT:
+            self.assertTrue(permutation2(test_string1, test_string2))
+        # False check
+        for test_string1, test_string2 in self.dataF:
+            self.assertFalse(permutation2(test_string1, test_string2))
 
 
 if __name__ == '__main__':
-    str1 = "Hello"
-    str2 = "lolHe"
-    print(permutation1(str1, str2))
+    unittest2.main()
