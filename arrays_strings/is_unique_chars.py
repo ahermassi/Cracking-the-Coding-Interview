@@ -1,3 +1,5 @@
+import unittest2 as unittest
+
 """
  Implement an algorithm to determine if a string has all unique characters.
  What if you cannot use additional data structures?
@@ -50,8 +52,18 @@ def is_unique_chars_v3(str):
     return True
 
 
+class Test(unittest.TestCase):
+    dataT = ['abcd', 's4fad', '']
+    dataF = ['23ds2', 'hb 627jh=j ()']
+
+    def test_is_unique(self):
+        # True check
+        for test_string in self.dataT:
+            self.assertTrue(is_unique_chars_v1(test_string))
+        # False check
+        for test_string in self.dataF:
+            self.assertFalse(is_unique_chars_v1(test_string))
+
+
 if __name__ == '__main__':
-    str = "Hello"
-    print(is_unique_chars_v1(str))
-    print(is_unique_chars_v2(str))
-    print(is_unique_chars_v3(str))
+    unittest.main()
