@@ -12,6 +12,8 @@ def permutation1(str1, str2):
     => O(N log N) time
     => O(N) space
     """
+    if len(str1) != len(str2):
+        return False
     return sorted(str1) == sorted(str2)  # sort() method works only with lists; list(str1).sort(), returns None
 
 
@@ -23,6 +25,8 @@ def permutation2(str1, str2):
     => O(N) time
     => O(N) space
     """
+    if len(str1) != len(str2):
+        return False
     chars_map = defaultdict(int)
     for char in str1:
         chars_map[char] += 1
