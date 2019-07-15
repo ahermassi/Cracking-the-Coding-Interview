@@ -1,4 +1,4 @@
-import unittest2
+import unittest2 as unittest
 
 """
 Given two strings, write a method to decide if one is a permutation of the
@@ -37,7 +37,7 @@ def permutation2(str1, str2):
     return True
 
 
-class Test(unittest2.TestCase):
+class Test(unittest.TestCase):
     dataT = (
         ('abcd', 'bacd'),
         ('3563476', '7334566'),
@@ -59,4 +59,4 @@ class Test(unittest2.TestCase):
 
 
 if __name__ == '__main__':
-    unittest2.main()
+    unittest.main()
